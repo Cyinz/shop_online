@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_online/pages/cart_page.dart';
 import 'package:shop_online/pages/category_page.dart';
 import 'package:shop_online/pages/home_page.dart';
@@ -60,6 +61,9 @@ class IndexState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
+    //设置设计稿初始屏幕大小
+    ScreenUtil.instance = ScreenUtil(width: 1080, height: 1980)..init(context);
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
