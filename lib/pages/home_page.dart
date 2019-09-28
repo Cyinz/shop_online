@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:shop_online/service_method.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //首页
 class HomePage extends StatefulWidget {
@@ -27,25 +27,36 @@ class HomeState extends State<HomePage> {
           if (snapshot.hasData) {
             //数据处理
             var data = json.decode(snapshot.data.toString());
-            //顶部轮播组件列表
+            //顶部轮播组件列表数据
             List<Map> _swiperDataList = (data['data']['slides'] as List).cast();
+            //导航菜单数据
             List<Map> _navigatorList =
                 (data['data']['category'] as List).cast();
+            //广告图片数据
             String _adPicture =
                 data['data']['advertesPicture']['PICTURE_ADDRESS'];
+            //店长数据
+            String _leaderImage = data['data']['shopInfo']['leaderImage'];
+            String _leaderPhone = data['data']['shopInfo']['leaderPhone'];
 
-            return Column(
-              children: <Widget>[
-                SwiperDiy(
-                  swiperDataList: _swiperDataList,
-                ),
-                TopNavigator(
-                  navigatorList: _navigatorList,
-                ),
-                AdNanner(
-                  adPicture: _adPicture,
-                ),
-              ],
+            return SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  SwiperDiy(
+                    swiperDataList: _swiperDataList,
+                  ),
+                  TopNavigator(
+                    navigatorList: _navigatorList,
+                  ),
+                  AdNanner(
+                    adPicture: _adPicture,
+                  ),
+                  LeaderPhone(
+                    leaderImage: _leaderImage,
+                    leaderPhone: _leaderPhone,
+                  ),
+                ],
+              ),
             );
           } else {
             return Center(
@@ -101,9 +112,11 @@ class TopNavigator extends StatelessWidget {
         children: <Widget>[
           Image.network(
             item['image'],
-            width: ScreenUtil().setWidth(120.0),
+            height: 60,
           ),
-          Text(item['mallCategoryName']),
+          Text(
+            item['mallCategoryName'],
+          ),
         ],
       ),
     );
@@ -119,9 +132,10 @@ class TopNavigator extends StatelessWidget {
     }
 
     return Container(
-      height: ScreenUtil().setHeight(400.0),
-      padding: EdgeInsets.all(3.0),
+      margin: EdgeInsets.only(top: ScreenUtil().setHeight(10.0)),
+      height: 190,
       child: GridView.count(
+        childAspectRatio: 0.9,
         crossAxisCount: 5,
         padding: EdgeInsets.all(5.0),
         children: navigatorList.map((item) {
@@ -143,5 +157,36 @@ class AdNanner extends StatelessWidget {
     return Container(
       child: Image.network(adPicture),
     );
+  }
+}
+
+//拨打店长电话模块
+class LeaderPhone extends StatelessWidget {
+  final String leaderImage;
+  final String leaderPhone;
+
+  LeaderPhone({Key key, this.leaderImage, this.leaderPhone}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      child: InkWell(
+        onTap: () {
+          _launchURL();
+        },
+        child: Image.network(leaderImage),
+      ),
+    );
+  }
+
+  //拨打店长电话
+  void _launchURL() async {
+    String url = 'tel:' + leaderPhone;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
