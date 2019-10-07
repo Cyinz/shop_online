@@ -42,7 +42,7 @@ class IndexState extends State<IndexPage> {
   ];
 
   //底部导航页面
-  final List _tabBodies = [
+  final List<Widget> _tabBodies = [
     HomePage(), //首页
     CategoryPage(), //分类页
     CartPage(), //购物车页
@@ -71,7 +71,10 @@ class IndexState extends State<IndexPage> {
           '百姓生活+',
         ),
       ),
-      body: _currentPage,
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _tabBodies,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: _bottomTabs,
         //设置底部导航栏类型，否则超过三个item会报错
