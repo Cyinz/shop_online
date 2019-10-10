@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:shop_online/config/service_url.dart';
 
 //获得内容
-Future request(url, formData) async {
+Future request(url, {formData}) async {
   try {
     print('开始获取数据............');
     Response response;

@@ -66,11 +66,6 @@ class IndexState extends State<IndexPage> {
     ScreenUtil.instance = ScreenUtil(width: 1080, height: 1980)..init(context);
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: Text(
-          '百姓生活+',
-        ),
-      ),
       body: IndexedStack(
         index: _currentIndex,
         children: _tabBodies,
