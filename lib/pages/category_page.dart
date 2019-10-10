@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provide/provide.dart';
 import 'package:shop_online/model/category.dart';
 import 'package:shop_online/provide/child_category.dart';
-import 'package:shop_online/service_method.dart';
+import 'package:shop_online/service/service_method.dart';
 import 'dart:convert';
 import 'package:shop_online/model/categoryGoodsList.dart';
 import 'package:shop_online/provide/category_goods_list.dart';
