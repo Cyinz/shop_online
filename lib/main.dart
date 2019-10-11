@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:provide/provide.dart';
 import 'package:shop_online/pages/index_page.dart';
+import 'package:shop_online/provide/cart.dart';
 import 'package:shop_online/provide/child_category.dart';
 import 'package:shop_online/provide/category_goods_list.dart';
 import 'package:shop_online/provide/details_info.dart';
@@ -13,12 +14,14 @@ void main() {
   var childCategory = ChildCategory();
   var categoryGoodsListProvider = CategoryGoodsListProvider();
   var detailsInfoProvide = DetailsInfoProvide();
+  var cartProvide = CartProvide();
   providers
     ..provide(Provider<ChildCategory>.value(childCategory))
     ..provide(
         Provider<CategoryGoodsListProvider>.value(categoryGoodsListProvider))
   ..provide(
-      Provider<DetailsInfoProvide>.value(detailsInfoProvide));
+      Provider<DetailsInfoProvide>.value(detailsInfoProvide))
+  ..provide(Provider<CartProvide>.value(cartProvide));
   runApp(ProviderNode(child: MyApp(), providers: providers));
 }
 
