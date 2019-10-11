@@ -5,23 +5,26 @@ import 'package:shop_online/pages/index_page.dart';
 import 'package:shop_online/provide/cart.dart';
 import 'package:shop_online/provide/child_category.dart';
 import 'package:shop_online/provide/category_goods_list.dart';
+import 'package:shop_online/provide/current_index.dart';
 import 'package:shop_online/provide/details_info.dart';
 import 'routers/routers.dart';
 import 'routers/application.dart';
 
 void main() {
   var providers = Providers();
-  var childCategory = ChildCategory();
+  var childCategoryProvider = ChildCategoryProvider();
   var categoryGoodsListProvider = CategoryGoodsListProvider();
-  var detailsInfoProvide = DetailsInfoProvide();
-  var cartProvide = CartProvide();
+  var detailsInfoProvider = DetailsInfoProvider();
+  var cartProvider = CartProvider();
+  var currentIndexProvider = CurrentIndexProvider();
   providers
-    ..provide(Provider<ChildCategory>.value(childCategory))
+    ..provide(Provider<ChildCategoryProvider>.value(childCategoryProvider))
     ..provide(
         Provider<CategoryGoodsListProvider>.value(categoryGoodsListProvider))
   ..provide(
-      Provider<DetailsInfoProvide>.value(detailsInfoProvide))
-  ..provide(Provider<CartProvide>.value(cartProvide));
+      Provider<DetailsInfoProvider>.value(detailsInfoProvider))
+  ..provide(Provider<CartProvider>.value(cartProvider))
+  ..provide(Provider<CurrentIndexProvider>.value(currentIndexProvider));
   runApp(ProviderNode(child: MyApp(), providers: providers));
 }
 

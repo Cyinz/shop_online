@@ -7,15 +7,15 @@ import 'package:shop_online/provide/details_info.dart';
 class DetailsWeb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var goodsDetails = Provide.value<DetailsInfoProvide>(context)
+    var goodsDetails = Provide.value<DetailsInfoProvider>(context)
         .goodsInfo
         .data
         .goodInfo
         .goodsDetail;
 
-    return Provide<DetailsInfoProvide>(
+    return Provide<DetailsInfoProvider>(
       builder: (context, child, val) {
-        var isLeft = Provide.value<DetailsInfoProvide>(context).isLeft;
+        var isLeft = Provide.value<DetailsInfoProvider>(context).isLeft;
         if (isLeft) {
           return Container(
             child: Html(

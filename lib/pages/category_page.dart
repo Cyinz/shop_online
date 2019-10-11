@@ -99,7 +99,7 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
         var childList = list[index].bxMallSubDto;
         var categoryId = list[index].mallCategoryId;
 
-        Provide.value<ChildCategory>(context)
+        Provide.value<ChildCategoryProvider>(context)
             .getChildCategory(childList, categoryId);
         _getGoodsList(categoryId: categoryId);
       },
@@ -131,7 +131,7 @@ class _LeftCategoryNavState extends State<LeftCategoryNav> {
       setState(() {
         list = category.data;
       });
-      Provide.value<ChildCategory>(context)
+      Provide.value<ChildCategoryProvider>(context)
           .getChildCategory(list[0].bxMallSubDto, list[0].mallCategoryId);
     });
   }
@@ -166,7 +166,7 @@ class _RightCategoryNavState extends State<RightCategoryNav> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Provide<ChildCategory>(
+      child: Provide<ChildCategoryProvider>(
         builder: (context, child, childCategory) {
           return Container(
             height: ScreenUtil().setHeight(110.0),
@@ -198,13 +198,13 @@ class _RightCategoryNavState extends State<RightCategoryNav> {
   Widget _rightInkWell(int index, BxMallSubDto item) {
     //是否已点击
     bool isClick = false;
-    isClick = (index == Provide.value<ChildCategory>(context).childIndex)
+    isClick = (index == Provide.value<ChildCategoryProvider>(context).childIndex)
         ? true
         : false;
 
     return InkWell(
       onTap: () {
-        Provide.value<ChildCategory>(context)
+        Provide.value<ChildCategoryProvider>(context)
             .changeChildIndex(index, item.mallSubId);
         _getGoodsList(item.mallSubId);
       },
@@ -224,7 +224,7 @@ class _RightCategoryNavState extends State<RightCategoryNav> {
   //获取商品分类列表
   void _getGoodsList(String categorySubId) async {
     var data = {
-      'categoryId': Provide.value<ChildCategory>(context).categoryId,
+      'categoryId': Provide.value<ChildCategoryProvider>(context).categoryId,
       'categorySubId': categorySubId,
       'page': 1
     };
@@ -258,7 +258,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
     return Provide<CategoryGoodsListProvider>(
       builder: (context, child, data) {
         try {
-          if (Provide.value<ChildCategory>(context).page == 1) {
+          if (Provide.value<ChildCategoryProvider>(context).page == 1) {
             //将列表位置重置
             scrollController.jumpTo(0.0);
           }
@@ -276,7 +276,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
                   textColor: Colors.pink,
                   infoColor: Colors.pink,
                   showInfo: true,
-                  noMoreText: Provide.value<ChildCategory>(context).noMoreText,
+                  noMoreText: Provide.value<ChildCategoryProvider>(context).noMoreText,
                   infoText: '加载中',
                   loadReadyText: '上拉加载',
                 ),
@@ -301,12 +301,12 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
   }
 
   void _getMoreList() {
-    Provide.value<ChildCategory>(context).addPage();
+    Provide.value<ChildCategoryProvider>(context).addPage();
 
     var data = {
-      'categoryId': Provide.value<ChildCategory>(context).categoryId,
-      'categorySubId': Provide.value<ChildCategory>(context).subId,
-      'page': Provide.value<ChildCategory>(context).page,
+      'categoryId': Provide.value<ChildCategoryProvider>(context).categoryId,
+      'categorySubId': Provide.value<ChildCategoryProvider>(context).subId,
+      'page': Provide.value<ChildCategoryProvider>(context).page,
     };
 
     request('getMallGoods', formData: data).then((val) {
@@ -321,7 +321,7 @@ class _CategoryGoodsListState extends State<CategoryGoodsList> {
           textColor: Colors.white,
           fontSize: 16.0,
         );
-        Provide.value<ChildCategory>(context).changeNoMore('没有更多了');
+        Provide.value<ChildCategoryProvider>(context).changeNoMore('没有更多了');
       } else {
         Provide.value<CategoryGoodsListProvider>(context)
             .getMoreList(goodsList.data);

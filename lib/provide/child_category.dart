@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_online/model/category.dart';
 
-class ChildCategory with ChangeNotifier{
+class ChildCategoryProvider with ChangeNotifier{
   //子类列表
   List<BxMallSubDto> childCategoryList = [];
   //子类索引

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_online/model/cartInfo.dart';
 
-class CartProvide with ChangeNotifier {
+class CartProvider with ChangeNotifier {
   String cartString = "[]";
   //商品列表
   List<CartInfoModel> cartList = [];
@@ -25,12 +25,18 @@ class CartProvide with ChangeNotifier {
     bool isHave = false;
     //索引
     int ival = 0;
+    allPrice = 0;
+    allGoodsCount = 0;
     //循环判断购物车中是否已有此商品
     tempList.forEach((item) {
       if (item['goodsId'] == goodsId) {
         tempList[ival]['count'] = item['count'] + 1;
         cartList[ival].count++;
         isHave = true;
+      }
+      if(item['isCheck']){
+        allPrice += (cartList[ival].price * cartList[ival].count);
+        allGoodsCount += cartList[ival].count;
       }
       ival++;
     });
@@ -44,6 +50,8 @@ class CartProvide with ChangeNotifier {
         'images': images,
         'isCheck': true,
       };
+      allPrice += (price * count);
+      allGoodsCount  += count;
       tempList.add(newGoods);
       cartList.add(new CartInfoModel.fromJson(newGoods));
     }

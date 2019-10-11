@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shop_online/model/details.dart';
 import 'package:shop_online/service/service_method.dart';
 
-class DetailsInfoProvide with ChangeNotifier {
+class DetailsInfoProvider with ChangeNotifier {
   DetailsModel goodsInfo = null;
 
   //设置左边详情和右边评论是否被点击

@@ -9,7 +9,7 @@ class CartBottom extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(5.0),
       color: Colors.white,
-      child: Provide<CartProvide>(builder: (context, child, val) {
+      child: Provide<CartProvider>(builder: (context, child, val) {
         return Row(
           children: <Widget>[
             _selectAllButton(context),
@@ -24,7 +24,7 @@ class CartBottom extends StatelessWidget {
   //全选按钮
   Widget _selectAllButton(context) {
     //是否全选
-    bool isAllCheck = Provide.value<CartProvide>(context).isAllCheck;
+    bool isAllCheck = Provide.value<CartProvider>(context).isAllCheck;
     return Container(
       child: Row(
         children: <Widget>[
@@ -32,7 +32,7 @@ class CartBottom extends StatelessWidget {
             value: isAllCheck,
             activeColor: Colors.pink,
             onChanged: (bool val) {
-              Provide.value<CartProvide>(context).changeAllCheckButtonState(val);
+              Provide.value<CartProvider>(context).changeAllCheckButtonState(val);
             },
           ),
           Text('全选'),
@@ -43,7 +43,7 @@ class CartBottom extends StatelessWidget {
 
   //合计信息
   Widget _allPriceArea(context) {
-    double allPrice = Provide.value<CartProvide>(context).allPrice;
+    double allPrice = Provide.value<CartProvider>(context).allPrice;
     return Container(
       width: ScreenUtil().setWidth(650.0),
       child: Column(
@@ -91,7 +91,7 @@ class CartBottom extends StatelessWidget {
 
   //结算按钮
   Widget _goButton(context) {
-    int allGoodsCount = Provide.value<CartProvide>(context).allGoodsCount;
+    int allGoodsCount = Provide.value<CartProvider>(context).allGoodsCount;
     return Container(
       width: ScreenUtil().setWidth(200.0),
       padding: EdgeInsets.only(left: 10.0),

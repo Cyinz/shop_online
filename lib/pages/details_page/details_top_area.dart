@@ -6,9 +6,9 @@ import 'package:shop_online/provide/details_info.dart';
 class DetailsTopArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provide<DetailsInfoProvide>(
+    return Provide<DetailsInfoProvider>(
       builder: (context, child, val){
-        var goodsInfo = Provide.value<DetailsInfoProvide>(context).goodsInfo.data.goodInfo;
+        var goodsInfo = Provide.value<DetailsInfoProvider>(context).goodsInfo.data.goodInfo;
 
         if(goodsInfo != null){
           return Container(

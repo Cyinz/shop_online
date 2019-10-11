@@ -26,12 +26,12 @@ class CartState extends State<CartPage> {
         future: _getCartInfo(context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List cartList = Provide.value<CartProvide>(context).cartList;
+            List cartList = Provide.value<CartProvider>(context).cartList;
             return Stack(
               children: <Widget>[
-                Provide<CartProvide>(
+                Provide<CartProvider>(
                   builder: (context, child, childCategory){
-                    cartList = Provide.value<CartProvide>(context).cartList;
+                    cartList = Provide.value<CartProvider>(context).cartList;
                     print("cartList = :${cartList}");
                     return ListView.builder(
                       itemCount: cartList.length,
@@ -58,7 +58,7 @@ class CartState extends State<CartPage> {
 
   //获取商品信息
   Future<String> _getCartInfo(BuildContext context) async {
-    await Provide.value<CartProvide>(context).getCartInfo();
+    await Provide.value<CartProvider>(context).getCartInfo();
     return 'end';
   }
 }
